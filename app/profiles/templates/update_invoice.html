@@ -1,0 +1,172 @@
+{% extends 'head.html' %}
+{% block invoice %}
+
+<div class="container my-5">
+    <center><h1>Update Invoice</h1></center><hr>
+    <form method="post" id="myForm">
+        {% csrf_token %}
+        <div class="row my-2">
+            <div class="col">
+                <label for="formGroupExampleInput" class="form-label">Invoice Name</label>
+                <input type="text" class="form-control" placeholder="invoice_name" name="invoice_name"
+                    aria-label="First name" id="formGroupExampleInput" value="{{data.invoice_name}}">
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput" class="form-label">Due Date</label>
+                <input type="date" class="form-control" name="duedate" value="{{data.duedate}}">
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <label for="formGroupExampleInput" class="form-label">Partner Name</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="partnername">
+                    <option>Select Artist</option>
+                    {% for partner in partners %}
+                    {% if data.partnername == partner %}
+                    <option value="{{partner.id}}" selected>{{partner.profile.name}}</option>
+                    {% else %}
+                    <option value="{{partner.id}}">{{partner.profile.name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput" class="form-label">Artist Name</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="artistname">
+                    <option>Select Artist</option>
+                    {% for artist in artists %}
+                    {% if data.artistname == artist %}
+                    <option value="{{artist.id}}" selected>{{artist.artist_name}}</option>
+                    {% else %}
+                    <option value="{{artist.id}}">{{artist.artist_name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div id="bodyRow">
+            <div class="row my-2">
+                <div class="col">
+                    {% for key, value in data.services.items %}
+                    <label for="formGroupExampleInput" class="form-label">Services Name{{key}}</label>
+                    <input type="text" class="form-control" placeholder="servicesname{{key}}" name="servicesname{{key}}" value="{{value}}">
+                    {% endfor %}
+                </div>
+                <div class="col">
+                    {% for key, value in data.amounts.items %}
+                    <label for="formGroupExampleInput" class="form-label">Amount{{key}}</label>
+                    <input type="text" class="form-control" placeholder="amount{{key}}" name="amount{{key}}" value="{{value}}">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row my-2" id="dynamicFields">
+            </div>
+        </div>
+        <div class="col">
+            <input type="hidden" class="form-control" id="inputData" name="values">
+        </div>
+
+        <div class="row my-2">
+            <div class="col">
+                <button type="button" class="btn btn-danger" onclick="removeField()">Delete</button>
+                <button type="button" class="btn btn-primary" id="onAdd" onclick="addField()">ADD</button>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+              <div class="form-check">
+                {% if data.vat %}
+                <input class="form-check-input" type="checkbox" name="vat" id="flexCheckChecked" checked>
+                {% else %}
+                <input class="form-check-input" type="checkbox" name="vat" id="flexCheckChecked">
+                {% endif %}
+                <label class="form-check-label" for="flexCheckChecked">
+                  VAT(%)
+                </label>
+              </div>
+            </div>
+          </div>
+        <div class="row my-2">
+            <div class="col">
+                <div class="form-check">
+                    {% if data.paid %}
+                    <input class="form-check-input" type="checkbox" name="paid" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Paid
+                    </label>
+                    {% else %}
+                    <input class="form-check-input" type="checkbox" name="paid" id="flexCheckChecked">
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Paid
+                    </label>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var indexvalue = {{data.services|length}}
+    var fieldIndex = indexvalue;
+    function addField() {
+      var dynamicField = `
+        <div class="row my-1" id="removeClass${fieldIndex}">
+          <div class="col">
+            <label for="formGroupExampleInput${fieldIndex}" class="form-label">Services Name${fieldIndex}</label>
+            <input type="text" class="form-control" placeholder="servicesname${fieldIndex}"
+              name="servicesname${fieldIndex}" id="dynamicField${fieldIndex}">
+          </div>
+          <div class="col">
+            <label for="formGroupEx ampleInput1${fieldIndex}" class="form-label">Amount${fieldIndex}</label>
+            <input type="text" class="form-control" placeholder="amount${fieldIndex}"
+              name="amount${fieldIndex}" id="dynamicFields${fieldIndex}" required>
+          </div>
+        </div>
+      `;
+  
+      var dynamicFields = document.getElementById('dynamicFields');
+      dynamicFields.insertAdjacentHTML('beforeend', dynamicField);
+      fieldIndex++;
+    }
+  
+    function removeField() {
+      if (fieldIndex > 1) {
+        var dynamicField = document.getElementById('dynamicField' + (fieldIndex - 1));
+        var dynamicFields = document.getElementById('dynamicFields' + (fieldIndex - 1));
+  
+        dynamicField.parentNode.remove();
+        dynamicFields.parentNode.remove();
+        fieldIndex--;
+      }
+    }
+  
+    document.getElementById('myForm').addEventListener('submit', function (e) {
+  
+      var inputs = document.getElementById('bodyRow').getElementsByTagName('input');
+  
+      var values = [];
+  
+      for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        var inputName = input.name
+        var inputValue = input.value
+        var inputDict = {
+          "name": inputName,
+          "value": inputValue,
+        };
+        values.push(inputDict);
+      }
+      var inputData = document.getElementById('inputData')
+      inputData.value = JSON.stringify(values);
+    });
+  
+</script>
+{% endblock invoice %}

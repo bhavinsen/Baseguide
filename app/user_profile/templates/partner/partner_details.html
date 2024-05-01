@@ -1,0 +1,78 @@
+{% extends "user_base.html" %}
+{% block title %}partners{% endblock title%}
+
+{% block content %}
+<div class="div mt-5">
+    <a class="btn" href="{% url 'user_profile:update_partner' pk=partner.pk user_pk=partner.profile.owner_id.id %}" >Update Profile</a> 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userDeleteModal">
+        Delete
+      </button>
+
+    
+</div>
+<div class="row mt-5">
+    <h1>Partner details</h1>
+    <hr>
+    <div class="col">
+        <p>First Name:</p>
+        <p>Last Name:</p>
+        <p>Email address:</p>
+        <p>Phone number:</p>
+        <br>
+        <h4>Financial Details</h4>
+        <hr>
+        <p>Account Holder:</p>
+        <p>Bank Account Number:</p>
+        <p>Bic Code:</p>
+    </div>
+    <div class="col">
+        <p>{{ partner.profile.owner_id.first_name|default:"None" }}</p>
+        <p>{{ partner.profile.owner_id.last_name|default:"None" }}</p>
+        <p>{{ partner.profile.owner_id.email|default:"None" }}</p>
+        <p>{{ partner.phone_number|default:"None" }}</p>
+        <br>
+        <h4>.</h4>
+        <hr>
+        <p>{{ partner.accountholder|default:"None" }}</p>
+        <p>{{ partner.bankaccount_number|default:"None" }}</p>
+        <p>{{ partner.bic_code|default:"None" }}</p>
+    </div>
+    <div class="col">
+        <p>Company Name:</p>
+        <p>Coc Number:</p>
+        <p>Street:</p>
+        <p>City:</p>
+        <p>Zip Code:</p>
+        <p>Country:</p>
+    </div>
+    <div class="col">
+        <p>{{ partner.company_name|default:"None" }}</p>
+        <p>{{ partner.coc_number|default:"None" }}</p>
+        <p>{{ partner.street|default:"None" }}</p>
+        <p>{{ partner.city|default:"None" }}</p>
+        <p>{{ partner.zipcode|default:"None" }}</p>
+        <p>{{ partner.country|default:"None" }}</p>
+    </div>
+   
+</div>
+{% comment %} modal  {% endcomment %}  
+  <div class="modal fade" id="userDeleteModal" tabindex="-1" aria-labelledby="userDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="userDeleteModalLabel">Delete partner</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Do you want delete the partner?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a class="btn btn primary" href="{% url 'user_profile:delete_partner' pk=partner.profile.owner_id.id %}" >Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+

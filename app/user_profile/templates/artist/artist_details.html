@@ -1,0 +1,69 @@
+{% extends "user_base.html" %}
+{% block title %}Artists{% endblock title%}
+
+{% block content %}
+<div class="div mt-5">
+    <a class="btn" href="{% url 'user_profile:update_artist' pk=artist.pk user_pk=artist.profile.owner_id.id %}" >Update Profile</a>
+
+    {% comment %} Button trigger modal  {% endcomment %}
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userDeleteModal">
+        Delete
+      </button>
+    
+</div>
+<div class="row mt-5">
+    <h1>Artist details</h1>
+    <hr>
+    <div class="col">
+        <p>Artist Name:</p>
+        <p>First Name:</p>
+        <p>Last Name:</p>
+        <p>Email address:</p>
+        <p>Website link:</p>
+        <p>Phone number:</p>
+    </div>
+    <div class="col">
+        <p>{{ artist.artist_name|default:"None" }}</p>
+        <p>{{ artist.profile.owner_id.first_name|default:"None" }}</p>
+        <p>{{ artist.profile.owner_id.last_name|default:"None" }}</p>
+        <p>{{ artist.profile.owner_id.email|default:"None" }}</p>
+        <p><a href="{{ artist.website_link }}" target="_blank">{{ artist.website_link }}</a></p>
+        <p>{{ artist.phone_number|default:"None" }}</p>
+    </div>
+    <div class="col">
+        <p>Instagram profile:</p>
+        <p>Apple music profile:</p>
+        <p>Tidal profile:</p>
+        <p>Tiktok profile:</p>
+        <p>Spotify link:</p>
+    </div>
+    <div class="col">
+        <p><a href="{{ artist.instagram_profile }}" target="_blank">{{ artist.instagram_profile }}</a></p>
+        <p><a href="{{ artist.apple_music_profile }}" target="_blank">{{ artist.apple_music_profile }}</a></p>
+        <p><a href="{{ artist.tidal_profile }}" target="_blank">{{ artist.tidal_profile }}</a></p>
+        <p><a href="{{ artist.tiktok_profile }}" target="_blank">{{ artist.tiktok_profile }}</a></p>
+        <p><a href="{{ artist.spotify_link }}" target="_blank">{{ artist.spotify_link }}</a></p>
+    </div>
+   
+</div>
+{% comment %} modal  {% endcomment %}  
+  <div class="modal fade" id="userDeleteModal" tabindex="-1" aria-labelledby="userDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="userDeleteModalLabel">Delete Artist</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Do you want delete the Artist?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a class="btn btn primary" href="{% url 'user_profile:delete_artist' pk=artist.profile.owner_id.id %}" >Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+

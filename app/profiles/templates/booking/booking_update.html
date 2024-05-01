@@ -1,0 +1,85 @@
+{% extends 'head.html' %}
+
+{% block booking %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="my-3 text-center">Update Booking</h1><hr>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="artist_name">Artist Name:</label>
+                    <select class="form-control" name="artist_name" id="artist_name">
+                        <option>Select Artist</option>
+                        {% for artist in artists %}
+                        {% if booking and booking.artist_name_id == artist.id %}
+                        <option value="{{ artist.id }}" selected>{{ artist.artist_name }}</option>
+                        {% else %}
+                        <option value="{{ artist.id }}">{{ artist.artist_name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="event_name">Event Name:</label>
+                    <input type="text" class="form-control" name="event_name" id="event_name" value="{% if booking %}{{ booking.event_name }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="event_date">Event Date:</label>
+                    <input type="date" class="form-control" name="event_date" id="event_date" value="{{event_date_formatted}}">
+                </div>
+                <div class="form-group">
+                    <label for="venue_name">Venue Name:</label>
+                    <input type="text" class="form-control" name="venue_name" id="venue_name" value="{% if booking %}{{ booking.venue_name }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="start_time_performance">Start Time Performance:</label>
+                    <input type="datetime-local" class="form-control" name="start_time_performance" id="start_time_performance" value="{% if booking and booking.start_time_performance %}{{ booking.start_time_performance|date:'Y-m-d\TH:i' }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="performance_duration_in_minutes">Performance Duration (in minutes):</label>
+                    <input type="text" class="form-control" name="performance_duration_in_minutes" id="performance_duration_in_minutes" value="{% if booking %}{{ booking.performance_duration_in_minutes }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" value="{% if booking %}{{ booking.first_name }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" value="{% if booking %}{{ booking.last_name }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="business_name">Business Name:</label>
+                    <input type="text" class="form-control" name="business_name" id="business_name" value="{% if booking %}{{ booking.business_name }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" class="form-control" name="phone_number" id="phone_number" value="{% if booking %}{{ booking.phone_number }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="email_address">Email Address:</label>
+                    <input type="email" class="form-control" name="email_address" id="email_address" value="{% if booking %}{{ booking.email_address }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="flatfee">Flat Fee:</label>
+                    <input type="text" class="form-control" name="flatfee" id="flatfee" value="{% if booking %}{{ booking.flatfee }}{% endif %}">
+                </div>
+                <div class="form-group">
+                    <label for="extra_comments">Extra Comments:</label>
+                    <textarea name="extra_comments" class="form-control" id="" cols="30" rows="1" id="extra_comments">{{ booking.extra_comments }}</textarea>
+                </div>
+                <div class="form-group my-2">
+                    <input class="form-check-input" type="checkbox" name="vat" id="flexCheckChecked" {% if tax %}checked{% endif %}>
+                    <label class="form-check-label" for="flexCheckChecked">VAT(%)</label>
+                </div>
+                <div class="form-group my-2">
+                    <input type="checkbox" class="form-check-input" name="invoice_paid" id="invoice_paid" {% if booking and booking.invoice_paid %}checked{% endif %}>
+                    <label for="invoice_paid">Invoice Paid</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Booking</button>
+                <a href="{% url 'profiles:booking_list' %}"><button class="btn btn-primary">Show Booking</button></a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock booking %}

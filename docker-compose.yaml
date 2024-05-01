@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  web:
+    restart: "on-failure"
+    image: yourtickets:latest
+    build:
+      context: ""
+      dockerfile: build/Dockerfile
+    ports:
+      - "8000:80"
+    env_file:
+      - ./.env  
+    environment:
+      GUNICORN_CMD_ARGS: --reload
+    volumes:
+      - ./app:/app

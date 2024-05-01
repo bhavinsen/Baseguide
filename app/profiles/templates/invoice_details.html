@@ -1,0 +1,339 @@
+{% extends 'head.html' %}
+
+{% block invoice %}
+<div>
+  <center>
+    <div class="row my-5">
+      <div class="col-sm-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{datas|length}}</h5>
+            <h5 class="card-title">Open invoice</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">1</h5>
+            <h5 class="card-title">Overdue</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{paid_invoices|length}}</h5>
+            <h5 class="card-title">To be paid</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </center>
+</div>
+<div>
+  <div class="row my-2">
+    <div class="col-sm-2">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        New invoice
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Create Invoice</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" id="myForm">
+                {% csrf_token %}
+                <div class="row my-2">
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Invoice Name</label>
+                    <input type="text" class="form-control" placeholder="invoice_name" name="invoice_name"
+                      aria-label="First name" id="formGroupExampleInput">
+                  </div>
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Due Date</label>
+                    <input type="date" class="form-control" name="duedate">
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Partner Name</label>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="partnername">
+                      <option selected>Select Artist</option>
+                      {% for partner in partners %}
+                      <option value="{{partner.id}}">{{partner.profile.name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Artist Name</label>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="artistname">
+                      <option selected>Select Artist</option>
+                      {% for artist in artists %}
+                      <option value="{{artist.id}}">{{artist.artist_name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+
+                <div id="bodyRow">
+                  <div class="row my-2">
+                    <div class="col">
+                      <label for="formGroupExampleInput" class="form-label">Services Name</label>
+                      <input type="text" class="form-control" placeholder="servicesname1" name="servicesname0">
+                    </div>
+                    <div class="col">
+                      <label for="formGroupExampleInput" class="form-label">Amount</label>
+                      <input type="text" class="form-control" placeholder="amount1" name="amount0" required>
+                    </div>
+                  </div>
+                  <div class="row my-2" id="dynamicFields">
+                  </div>
+                </div>
+                <div class="col">
+                  <input type="hidden" class="form-control" id="inputData" name="values">
+                </div>
+
+
+                <div class="row my-2">
+                  <div class="col">
+                    <button type="button" class="btn btn-danger" onclick="removeField()">Delete</button>
+                    <button type="button" class="btn btn-primary" id="onAdd" onclick="addField()">ADD</button>
+                  </div>
+                </div>
+
+                <div class="row my-2">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="vat" id="flexCheckChecked">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        VAT(%)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="paid" id="flexCheckChecked">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        Paid
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Pick Artist
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="?artist_id=">All</a></li>
+          {% for artist in artists %}
+          <li><a class="dropdown-item" href="?artist_id={{ artist.id }}">{{ artist.artist_name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="dropdown">
+        <a href="/"><button class="btn btn-primary" type="button"> <i class="fa fa-home"></i> Home </button></a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div>
+  <table class="table my-5">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Partner</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Download</th>
+        <th scope="col">View</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    {% for data in datas %}
+    <tbody>
+      <tr>
+        <td>{{data.invoice_name}}</td>
+        <td>{{data.artistname}}</td>
+        {% for amount in amounts %}
+        {% if amount.invoice_id == data.id %}
+        <td>{{ amount.total }}</td>
+        {% endif %}
+        {% endfor %}
+        <td>{{data.partnername}}</td>
+        <td>{{data.duedate}}</td>
+        <td>
+          <input type="checkbox" class="status-checkbox" data-id="{{ data.id }}" {% if data.paid %}checked{% endif %} style="margin-left: 18px;">
+        </td>
+        <td>
+          <a href="{% url 'profiles:download_invoice' data.id %}" style="margin-left: 30px;"><i class="fa fa-download"></i></a>
+        </td>
+        <td>
+          <a href="{% url 'profiles:view_invoices' data.id %}" style="margin-left: 12px;"><i class="fa fa-eye"></i></a>
+        </td>
+        <td>
+          <a href="{% url 'profiles:update_invoices' data.id %}"><i class="fa fa-edit"></i></a>
+          <a href="" onclick="deleteInvoice({{ data.id }})" style="margin-left: 10px;">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+
+<script>
+  var fieldIndex = 1;
+  function addField() {
+    var dynamicField = `
+      <div class="row my-1" id="removeClass${fieldIndex}">
+        <div class="col">
+          <label for="formGroupExampleInput${fieldIndex}" class="form-label">Services Name ${fieldIndex + 1}</label>
+          <input type="text" class="form-control" placeholder="servicesname1"
+            name="servicesname${fieldIndex}" id="dynamicField${fieldIndex}">
+        </div>
+        <div class="col">
+          <label for="formGroupExampleInput1${fieldIndex}" class="form-label">Amount ${fieldIndex + 1}</label>
+          <input type="text" class="form-control" placeholder="amount1"
+            name="amount${fieldIndex}" id="dynamicFields${fieldIndex}" required>
+        </div>
+      </div>
+    `;
+
+    var dynamicFields = document.getElementById('dynamicFields');
+    dynamicFields.insertAdjacentHTML('beforeend', dynamicField);
+    fieldIndex++;
+  }
+
+  function removeField() {
+    if (fieldIndex > 1) {
+      var dynamicField = document.getElementById('dynamicField' + (fieldIndex - 1));
+      var dynamicFields = document.getElementById('dynamicFields' + (fieldIndex - 1));
+
+      dynamicField.parentNode.remove();
+      dynamicFields.parentNode.remove();
+      fieldIndex--;
+    }
+  }
+
+  document.getElementById('myForm').addEventListener('submit', function (e) {
+
+    var inputs = document.getElementById('bodyRow').getElementsByTagName('input');
+
+    var values = [];
+
+    for (var i = 0; i < inputs.length; i++) {
+      var input = inputs[i];
+      var inputName = input.name
+      var inputValue = input.value
+      var inputDict = {
+        "name": inputName,
+        "value": inputValue,
+      };
+      values.push(inputDict);
+    }
+    var inputData = document.getElementById('inputData')
+    inputData.value = JSON.stringify(values);
+  });
+
+</script>
+
+<script>
+  // ... Your existing code ...
+
+  function deleteInvoice(invoiceId) {
+    console.log('invoiceId: ', invoiceId)
+    
+    if (confirm("Are you sure you want to delete this invoice?")) {
+      // Fetch API example:
+      fetch(`/profile/delete-invoice/${invoiceId}/`, {
+        method: 'DELETE',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+      })
+      .then(response => {
+        if (response.ok) {
+          const row = document.querySelector(`tr[data-id="${invoiceId}"]`);
+          row.remove();
+        } else {
+          console.error('Error deleting the invoice');
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting the invoice:', error);
+      });
+    }
+  }
+
+  document.getElementById('myForm').addEventListener('submit', function (e) {
+    // ... Your existing code ...
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll(".status-checkbox");
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function (event) {
+        event.preventDefault(); // Prevent default checkbox behavior
+
+        const invoiceId = this.dataset.id;
+        const isPaid = this.checked;
+
+        // Fetch API example:
+        fetch(`/profile/update-status/${invoiceId}/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}",
+          },
+          body: JSON.stringify({ is_paid: isPaid.toString() }), // Convert to a string
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log("Status updated successfully");
+              // If the AJAX request is successful, update the checkbox state
+              this.checked = isPaid;
+            } else {
+              console.error("Error updating the status");
+            }
+          })
+          .catch((error) => {
+            console.error("Error updating the status:", error);
+          });
+      });
+    });
+  });
+</script>
+{% endblock invoice %}

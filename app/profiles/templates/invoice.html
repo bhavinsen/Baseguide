@@ -1,0 +1,530 @@
+{% extends 'head.html' %}
+
+{% block invoice %}
+<table class="waffle no-grid" cellspacing="0" cellpadding="0" style="width: 100%;">
+    <div class="container w-50 ">
+        <div style="display: none; margin: 10px auto;" class="alert alert-success" role="alert" id="messages">
+        </div>
+    </div>
+    <tbody>
+        <tr style="height: 90px;">
+
+            <td class="s0" colspan="7" style="margin: 0px auto; text-align: center;">
+                <img src='https://lh5.googleusercontent.com/esRDG_P2BVjz-1QKRhriITafMWyHFsYjfxE1cLzcecw3mpbxEBb7VFexCw12qnlmXZR3HebcNY-civ1zTSy6yz6clUsOUf6HNzqifnXM0mvsg6kYLOxd8Q3XWm8BA617-t2m-cii4DXggV2ry7Q'
+                    style='display: block;margin: 0px auto;' height='50' width='250'>
+            </td>
+
+        </tr>
+        <tr style=" width:100%">
+            <td colspan="5" style="width: 80%;"></td>
+            <td class="s3" colspan="2" style="    background-color: #ffffff;
+                text-align: left;
+                font-weight: bold;
+                color: #041d39;
+                font-family: 'Arial';
+                font-size: 18pt;
+                padding: 0px;
+                margin: 0px;
+                vertical-align: bottom;
+                white-space: nowrap;
+                direction: ltr;
+                padding: 2px 3px 2px 3px;" dir="ltr">BASEGUIDE</td>
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td colspan="5" style="width: 80%;"></td>
+            <td class="s4" colspan="2" dir="ltr" style="    background-color: #ffffff;
+        text-align: left;
+        color: #222222;
+        font-family: 'Arial';
+        font-size: 15px;
+        padding: 0px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        margin: 0px;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">Sniep 41</td>
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td colspan="5" style="width: 80%;"></td>
+            <td class="s4" colspan="2" dir="ltr" style="    background-color: #ffffff;
+        text-align: left;
+        color: #222222;
+        font-family: 'Arial';
+        margin: 0px;
+        font-size: 15px;
+        padding: 0px;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">1112 AC, Diemen</td>
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td colspan="5" style="width: 80%;"></td>
+            <td class="s4" colspan="2" dir="ltr" style="    background-color: #ffffff;
+        text-align: left;
+        color: #222222;
+        font-family: 'Arial';
+        font-size: 15px;
+        padding: 0px;
+        white-space: nowrap;
+        margin: 0px;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">E: info@baseguide.nl</td>
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td colspan="5" style="width: 80%;"></td>
+            <td class="s4" colspan="2" dir="ltr" style="    background-color: #ffffff;
+        text-align: left;
+        color: #222222;
+        font-family: 'Arial';
+        margin: 0px;
+        font-size: 15px;
+        padding: 0px;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">T: 06-51433719</td>
+
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td colspan="5" style="width: 80%;"></td>
+            <td class="s4" colspan="2" dir="ltr" style="background-color: #ffffff;
+                    text-align: left;
+                    color: #222222;
+                    font-family: 'Arial';
+                    font-size: 15px;
+                    white-space: nowrap;
+                    margin: 0px;
+                    padding: 0px;
+                    direction: ltr;
+                    padding: 2px 3px 2px 3px;">Kvk-nummer: 62950258</td>
+        </tr>
+        <tr style="height: 20px;">
+
+            <td class="s0" colspan="7"></td>
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s0" colspan="7"></td>
+
+        </tr>
+        <tr style=" width:100%">
+            <td class="s3" colspan="7" style="background-color: #ffffff;
+                text-align: left;
+                color: #000000;
+                font-weight: bold;
+                font-family: 'Arial';
+                font-size: 18pt;
+                vertical-align: bottom;
+                white-space: nowrap;
+                direction: ltr;
+                padding: 2px 3px 2px 3px;" dir="ltr">Business Name</td>
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td class="s7" colspan="7" style="
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 12px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;" dir="ltr">Address</td>
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td class="s7" colspan="7" style="
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 12px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;" dir="ltr">Zip code + City</td>
+        </tr>
+        <tr style=" width:100%; padding: 0px; margin: 0px;">
+            <td class="s7" colspan="7" style="
+        background-color: #ffffff;
+     text-align: left;
+     color: #000000;
+     font-family: 'Arial';
+     font-size: 12px;
+     vertical-align: bottom;
+     white-space: nowrap;
+     direction: ltr;
+     padding: 2px 3px 2px 3px;" dir="ltr">KvK-nummer: </td>
+
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s0"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style=" width:100%; height: 20px;">
+
+            <td class="s0"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s8" colspan="7" style="background-color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+        color: #041d39;
+        font-family: 'docs-Helvetica Neue',Arial;
+        font-size: 16pt;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;" dir="ltr">Factuur</td>
+        </tr>
+        <tr style=" width:100%; height: 20px;">
+
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td></td>
+        </tr>
+        <tr style=" width:100%">
+            <td class="s0" colspan="7" dir="ltr" style="background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'docs-Helvetica Neue',Arial;
+        font-size: 11pt;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">
+                <span style="font-weight:bold;color:#041d39;">factuur datum : </span>
+                <span style="color:#000000;">{{invoice_date}}</span>
+            </td>
+        </tr>
+        <tr style=" width:100%">
+            <td class="s0" dir="ltr" colspan="7" style="background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'docs-Helvetica Neue',Arial;
+        font-size: 11pt;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">
+                <span style="font-weight:bold;color:#041d39;">Vervaldatum : </span>
+                <span style="color:#000000;">{{dueDate}}</span>
+            </td>
+        </tr>
+        <tr style=" width:100%">
+            <td class="s0" dir="ltr" colspan="7" style="background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'docs-Helvetica Neue',Arial;
+        font-size: 11pt;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">
+                <span style="font-weight:bold;color:#041d39;">factuurnummer : </span>
+                <span style="color:#000000;">45235425585 </span>
+            </td>
+        </tr>
+        <tr style=" width:100%; height:20px">
+
+            <td class="s0"></td>
+            <td></td>
+            <td></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+        </tr>
+        <tr style=" width:100%;  height:20px">
+
+            <td class="s0"></td>
+            <td class="s0" dir="ltr"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+        </tr>
+        <tr style=" width:100%" style="border-bottom: 3px SOLID #a6d4e8;">
+            <td class="s9" colspan="6" dir="ltr" style="border-bottom: 3px SOLID #a6d4e8;
+        background-color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+        color: #041d39;
+        font-family: 'docs-Helvetica Neue',Arial;   
+        font-size: 15px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">Omschrijving</td>
+
+            <td class="s10" dir="ltr" style="border-bottom: 3px SOLID #a6d4e8;
+        background-color: #ffffff;
+        text-align: right;
+        font-weight: bold;
+        color: #041d39;
+        font-family: 'docs-Helvetica Neue',Arial;
+        font-size: 15px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">Bedrag</td>
+
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s12"></td>
+            <td class="s0"></td>
+        </tr>
+        <tr style=" width:100%; height: 20px;">
+
+            <td class="s0"></td>
+            <td class="s19" dir="ltr"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s19"></td>
+            <td class="s0"></td>
+        </tr>
+        {% for key, value in values.items %}
+        <tr style=" width:100%; margin-top: 20px;">
+            <td class="s15" dir="ltr" colspan="6" style="background-color: #ffffff;
+        text-align: left;
+        color: #666666;
+        font-family: 'Arial';
+        font-size: 15px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">{{key}}</td>
+            <td style="width:10%; text-align: right; color: #666666;font-size: 15px;">€ {{value}}.00</td>
+        </tr>
+        {% endfor %}
+        <tr style=" width:100%">
+
+            <td class="s0" colspan="7" style="border-bottom: 3px SOLID #a6d4e8;"></td>
+
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="s0"></td>
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s19" dir="ltr"></td>
+            <td class="s0"></td>
+        </tr>
+        <tr style=" width:100%; height: 20px;">
+            <td class="s0"></td>
+            <td class="s19" dir="ltr"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s19"></td>
+            <td class="s0"></td>
+        </tr>
+        <tr style=" width:100%;">
+            <td class="s23" colspan="7" dir="ltr" style="    background-color: #ffffff;
+        text-align: right;
+        font-weight: bold;
+        color: #041d39;
+        font-family: 'Arial';
+        font-size: 13px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">Subtotaal <span
+                    style="font-size: 12pt; font-weight:100; width:120px;  color: #666666;"> € {{subtotal}},00 </span>
+            </td>
+
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s23" dir="ltr" colspan="7" style="    background-color: #ffffff;
+        text-align: right;
+        font-weight: bold;
+        color: #041d39;
+        font-family: 'Arial';
+        font-size: 13px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">BTW {{tax}}% <span
+                    style="font-size: 12pt; font-weight:100; width:120px; color: #666666;"> € {{tax_amount}},00 </span>
+            </td>
+        </tr>
+
+        <tr style=" width:100%">
+
+            <td class="s23" dir="ltr" colspan="7" style="    background-color: #ffffff;
+        text-align: right;
+        font-weight: bold;
+        color: #041d39;
+        font-family: 'Arial';
+        font-size: 13px;
+        vertical-align: bottom;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 2px 3px 2px 3px;">Totaal te voldoen <span
+                    style="font-size: 12pt; font-weight:normal; width:10px; color: #666666;"> € {{finalamount}},00
+                </span> </td>
+        </tr>
+        <tr style="height: 20px;">
+
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+        </tr>
+        <tr style="height: 20px;background-color: #041d39;">
+
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+            <td class="s0"></td>
+        </tr>
+
+        <tr>
+            <td class="s27 softmerge" colspan="7" dir="ltr"
+                style="background-color: #041d39; color:white; text-align:center; border-color:#041d39">
+                <div class="softmerge-inner" style="width:620px;border-color:#041d39;margin: 0px auto;">Wij verzoeken u
+                    het
+                    verschuldigde bedrag binnen 14 dagen over te maken op </div>
+            </td>
+        </tr>
+        <tr style=" width:100%">
+
+            <td class="s27 softmerge" colspan="7" dir="ltr"
+                style="background-color: #041d39; text-align:center; border-color:#041d39">
+                <div class="softmerge-inner"
+                    style="width:100%;left:-83px ;color:white;margin: 0px auto; border-color:#041d39">International
+                    Bank Account Number NL 47 INGB 0006 8438 82 t.a.v. Yourtickets
+                </div>
+            </td>
+        </tr>
+        <tr style="height: 20px;background-color: #041d39;">
+
+            <td class="s25"></td>
+            <td class="s25"></td>
+            <td class="s25"></td>
+            <td class="s30"></td>
+            <td class="s25"></td>
+            <td class="s25"></td>
+            <td class="s0"></td>
+        </tr>
+    </tbody>
+
+</table>
+</div>
+</div>
+<!-- <div class="s0" colspan="7" style=" height: 100px; text-align: right;">
+    <a href=""
+        style="background: cornflowerblue; padding: 12px; color: white; border-color: cornflowerblue; border-radius: 5px; margin: 20px; font-size: 15px;cursor: pointer;"
+        id="invoice-button" type=" submit">Send Email</a>
+</div> -->
+
+{% comment %} <div id="endpoint-url-div" url="{% url 'send_invoice' %}" style="display: none;"></div> {% endcomment %}
+{% comment %} <!-- <div id="current_endpoint-url-div" url="{% url 'send_invoice' %}" style="display: none;"></div> -->
+{% endcomment %}
+<script>
+    $("#invoice-button").click(function (e) {
+        e.preventDefault()
+        var endpoint = document.getElementById('endpoint-url-div').getAttribute('url');
+        $('#invoice-button').hide()
+        $.ajax({
+            type: "POST",
+            url: endpoint,
+            data: {},
+            headers: {
+                'X-CSRFToken': '{{csrf_token}}'
+            },
+            success: function (result) {
+                $('#invoice-button').show()
+                $('#messages').show()
+                $('#messages').html('Please Check Your Email')
+                setTimeout(function () {
+                    $('#messages').hide()
+                }, 3000);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript" nonce="gfpJFqfobZ2rb4NzpMDUYg">
+    function posObj(sheet, id, row, col, x, y) {
+        var rtl = false;
+        var sheetElement = document.getElementById(sheet);
+        if (!sheetElement) {
+            sheetElement = document.getElementById(sheet + '-grid-container');
+        }
+        if (sheetElement) {
+            rtl = sheetElement.getAttribute('dir') == 'rtl';
+        }
+        var r = document.getElementById(sheet + 'R' + row);
+        var c = document.getElementById(sheet + 'C' + col);
+        if (r && c) {
+            var objElement = document.getElementById(id);
+            var s = objElement.style;
+            var t = y;
+            while (r && r != sheetElement) {
+                t += r.offsetTop;
+                r = r.offsetParent;
+            }
+            var offsetX = x;
+            while (c && c != sheetElement) {
+                offsetX += c.offsetLeft;
+                c = c.offsetParent;
+            }
+            if (rtl) {
+                offsetX -= objElement.offsetWidth;
+            }
+            s.left = offsetX + 'px';
+            s.top = t + 'px';
+            s.display = 'block';
+            s.border = '1px solid #000000';
+        }
+    }
+
+    function posObjs() {
+        posObj('0', 'embed_1524981420', 0, 2, 52, 15);
+    }
+    posObjs();
+</script>
+{% endblock invoice %}

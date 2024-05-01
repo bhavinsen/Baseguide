@@ -1,0 +1,18 @@
+{% extends "user_base.html" %}
+
+
+{% block content %}
+<div class="container mt-4 mb-5">
+    <h1>Update Partner Profile</h1>
+    <hr>
+    <div class="ps-5 w-75">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ partner_form.as_p }}
+            {{ profile_form.as_p }}
+            <button type="submit" class="btn btn-secondary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
